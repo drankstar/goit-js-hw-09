@@ -3,17 +3,29 @@ function getRandomHexColor() {
     .toString(16)
     .padStart(6, 0)}`;
 }
-const startBtn = document.querySelector('[data-start]');
-console.log(startBtn);
+const refs = {
+  startBtn: document.querySelector('[data-start]'),
+  stopBtn: document.querySelector('[data-stop=""]'),
+  body: document.querySelector('body'),
+};
 
-// const stopBtn = document.querySelector('[data-stop=""]');
-// console.log(stopBtn);
-
-const body = document.querySelector('body');
-console.log(body);
-
-startBtn.addEventListener('click', onClick);
+refs.startBtn.addEventListener('click', onClick);
+let interval;
 function onClick() {
+  interval = setInterval(changeColor, 1000);
+  refs.startBtn.disabled = true;
+  refs.stopBtn.disabled = false;
+}
+
+refs.stopBtn.disabled = true;
+refs.stopBtn.addEventListener('click', onStop);
+function onStop() {
+  clearInterval(interval);
+  refs.startBtn.disabled = false;
+  refs.stopBtn.disabled = true;
+}
+function changeColor() {
   const color = getRandomHexColor();
-  body.style.background = color;
+  refs.body.style.background = color;
+  console.log(changeColor);
 }
