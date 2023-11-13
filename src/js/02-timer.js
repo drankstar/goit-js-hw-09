@@ -32,6 +32,7 @@ const options = {
 flatpickr('#datetime-picker', options);
 
 function onStart() {
+  changeTime();
   interval = setInterval(changeTime, 1000);
 }
 
